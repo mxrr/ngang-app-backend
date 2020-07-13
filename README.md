@@ -4,7 +4,7 @@ Runs on Deno
 
 * needs built version of **ngang-app** to function
 
-* config.ts should be of format:
+**config.ts should be of format:**
 ```
 const Config = {
   port: <port>,
