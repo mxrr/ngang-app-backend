@@ -1,2 +1,3 @@
 ngang-app/
-dist/
+dist/index.html
+dist/static/
