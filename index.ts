@@ -2,6 +2,7 @@ import { Application } from "https://deno.land/x/abc@v1/mod.ts"
 import { HttpMethod } from 'https://deno.land/x/abc@v1/constants.ts'
 import { CORSConfig, cors } from 'https://deno.land/x/abc@v1/middleware/cors.ts'
 import { testContent } from './components/apiHandler.ts'
+import Config from './config.ts'
 
 
 const config: CORSConfig = {
@@ -12,7 +13,8 @@ const config: CORSConfig = {
 
 const app = new Application();
 
-const port: number = 8000;
+const port: number = Config.port;
+console.log(Config.key)
 
 app
   .get('/api', c => testContent())

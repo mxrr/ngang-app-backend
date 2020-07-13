@@ -1,3 +1,4 @@
 ngang-app/
 dist/index.html
 dist/static/
+config.ts
