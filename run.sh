@@ -1,1 +1,1 @@
-deno run --allow-net --allow-read --allow-write index.ts
+deno run --allow-net --allow-read --allow-write --unstable --allow-plugin index.ts
