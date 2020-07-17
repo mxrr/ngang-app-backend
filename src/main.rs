@@ -1,6 +1,6 @@
 #![feature(proc_macro_hygiene, decl_macro)]
 
-use rocket_contrib::json::Json;
+use rocket_contrib::json::{JsonValue};
 use serde::Serialize;
 
 use std::io;
@@ -18,8 +18,8 @@ struct Test {
 }
 
 #[get("/api")]
-fn api() -> Json<Test> {
-    Json(Test {yes: "ihan siistii".to_string(), no: 32})
+fn api() -> JsonValue {
+    JsonValue(api::api_handler::testcontent())
 }
 
 #[get("/")]
