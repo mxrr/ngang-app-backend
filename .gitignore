@@ -2,3 +2,8 @@ ngang-app/
 dist/index.html
 dist/static/
 config.ts
+
+
+#Added by cargo
+
+/target
