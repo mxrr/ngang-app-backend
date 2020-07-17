@@ -33,11 +33,11 @@ fn file(file: PathBuf) -> Option<NamedFile> {
 }
 
 
-fn rocket() -> rocket::Rocket {
+fn app() -> rocket::Rocket {
     rocket::ignite()
         .mount("/", routes![index, file, api])
 }
 fn main() {
-    rocket().launch();
+    app().launch();
 }
 
