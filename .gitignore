@@ -4,6 +4,7 @@ dist/static/
 config.ts
 content/
 .env
+node_modules/
 
 
 #Added by cargo
