@@ -1,13 +1,11 @@
 # ngang-app-backend
 
-Runs on ~~Deno~~ **Rust**
+Runs on NodeJS/Express
 
 * needs built version of **ngang-app** to function
 
-**Settings configured in `Rocket.toml`:**
+**Settings configured in `.env`:**
 ```
-address = "localhost"
-port = 5000
-keep_alive = 5
-log = "normal"
+PORT=<port>
+DB_URL=<ip/db_name>
 ```
