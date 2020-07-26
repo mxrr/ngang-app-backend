@@ -5,6 +5,7 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
+    "dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,11 +18,14 @@
     "url": "https://github.com/mxrr/ngang-app-backend/issues"
   },
   "homepage": "https://github.com/mxrr/ngang-app-backend#readme",
-  "dependencies": {},
+  "dependencies": {
+    "multer": "^1.4.2"
+  },
   "devDependencies": {
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "monk": "^7.3.0"
+    "monk": "^7.3.0",
+    "nodemon": "^2.0.4"
   }
 }
