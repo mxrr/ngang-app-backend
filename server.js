@@ -22,6 +22,7 @@ const app = express();
 
 
 //Multer conf
+const FILE_SIZE = 800*1024;
 const UPLOAD_FOLDER = './content/'
 const FORMATS = [
   'image/jpg',
@@ -51,11 +52,14 @@ const uploadFilter = async function(req, file, cb) {
   }
 }
 
-const upload = multer({ storage: storage, fileFilter: uploadFilter });
+const upload = multer({ 
+  storage: storage, 
+  fileFilter: uploadFilter
+  });
 
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: false }));
 
 app.use('/static', express.static('./dist/static'));
 app.use('/files', express.static('./content'));
@@ -101,7 +105,7 @@ app.post('/api/content', upload.single('file'), (req, res, next) => {
 app.post('/api/login', (req, res) => {
   const loginInfo = req.body;
   try {
-    if (loginInfo.token === undefined || loginInfo.token === '') {
+    if (loginInfo.token === undefined || loginInfo.token === '' || loginInfo.token === null) {
       users.find({user: loginInfo.user}).then((data) => {
         const hash = crypto.createHmac('sha256', secret).update(loginInfo.pwd).digest('hex');
     
@@ -121,15 +125,21 @@ app.post('/api/login', (req, res) => {
       });
     }
     else {
-      users.findOne({user: loginInfo.user}).then((data) => {
-        if(data.activeToken == loginInfo.token) {
-          res.status(200);
-          res.send({ user: loginInfo.user, token: data.activeToken});
-        }
-        else {
-          res.status(403);
+      users.findOne({activeToken: loginInfo.token}).then((data) => {
+		try {
+		  if(data.activeToken == loginInfo.token) {
+            res.status(200);
+            res.send({ user: loginInfo.user, token: data.activeToken});
+          }
+          else {
+            res.status(403);
+            res.send('Invalid or expired token');
+          }
+        } catch (err) {
+		  res.status(403);
           res.send('Invalid or expired token');
-        }
+		  console.log(err);
+		}
       })
     }
   } catch (error) {
