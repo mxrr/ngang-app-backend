@@ -5,7 +5,7 @@ config.ts
 content/
 .env
 node_modules/
-
+certs/
 
 #Added by cargo
 

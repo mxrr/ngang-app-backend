@@ -7,6 +7,8 @@ import bodyParser from 'body-parser'
 import { get } from 'http'
 import crypto from 'crypto'
 import multer from 'multer'
+import fs from 'fs'
+import https from 'https'
 const __dirname = path.resolve();
 dotenv.config();
 
@@ -19,6 +21,11 @@ const port = process.env.PORT;
 const secret = process.env.SECRET;
 
 const app = express();
+
+const creds = {
+    key: fs.readFileSync('./certs/privkey.pem', 'utf8'),
+    cert: fs.readFileSync('./certs/fullchain.pem', 'utf8')
+}
 
 
 //Multer conf
@@ -148,4 +155,5 @@ app.post('/api/login', (req, res) => {
   
 });
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+const httpsServer = https.createServer(creds, app)
+httpsServer.listen(port, () => console.log(`Listening on port ${port}`));
