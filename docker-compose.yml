@@ -1,0 +1,24 @@
+services:
+  mongo:
+    image: mongo
+    container_name: ngang_mongo
+    restart: always
+    volumes:
+      - ./mongo_data:/data/db
+
+  mongo-express:
+    image: mongo-express
+    container_name: ngang_mongo_express
+    restart: always
+    ports:
+      - 8082:8081
+
+
+  webserver:
+    image: mxr/ngang-app
+    container_name: ngang-cc
+    ports:
+      - 5050:5050
+    volumes:
+      - ./content/:/usr/src/ngang-cc/content
+    restart: unless-stopped

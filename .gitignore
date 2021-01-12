@@ -6,6 +6,7 @@ content/
 .env
 node_modules/
 certs/
+mongo_data/
 
 #Added by cargo
 
